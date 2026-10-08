@@ -136,6 +136,13 @@ html[data-theme="dark"] .partner-brand .company-light-lettering{display:block;po
 .footer-partners .company-logo{width:113px}
 @media(max-width:700px){.site-footer{align-items:flex-start;flex-direction:column;gap:24px}.footer-partners,html[data-theme="dark"] .footer-partners{gap:22px}}
 @media(max-width:600px){header{height:72px;min-height:72px;flex-wrap:nowrap;justify-content:space-between;padding:0 20px;gap:12px}.site-title{font-size:18px}.header-actions{width:auto;justify-content:flex-end}.theme-switch button{padding:5px 11px}.footer-partners,html[data-theme="dark"] .footer-partners{align-items:flex-start;flex-direction:column;gap:20px}.footer-partners .ministry-logo{width:190px}.footer-partners .company-logo{width:110px}.partner-item{gap:16px}.site-footer{padding:28px 0 32px}}
+
+.ebook-viewer .modal-head>div:first-child{min-width:0}
+.ebook-viewer .modal-head small{overflow-wrap:anywhere}
+.ebook-toolbar a{flex-shrink:0}
+html[data-theme="dark"] .ebook-toolbar{background:#111b2d;border-color:var(--line)}
+html[data-theme="dark"] .ebook-toolbar span{color:var(--muted)}
+html[data-theme="dark"] .ebook-frame{background:#0b1120}
 </style></head><body>
 <header><a class="site-title" href="#" aria-label="기후 AI 프렌즈 홈">기후 AI 프렌즈</a><div class="header-actions"><a class="header-gallery" href="#archive">참가작품 갤러리 <span aria-hidden="true">↗</span></a><div class="theme-switch" role="group" aria-label="화면 테마 선택"><button type="button" data-theme-choice="dark" aria-pressed="true">다크</button><button type="button" data-theme-choice="light" aria-pressed="false">라이트</button></div></div></header>
 <main class="container"><section class="hero"><div><div class="eyebrow">2026 CLIMATE AI FRIENDS</div><h1>기후 AI 프렌즈<br><em>참가작품 갤러리</em></h1><p class="lead">AI로 풀어낸 현장의 과제, 함께 만들어가는 변화.<br>두 개 분야, 20개 팀의 아이디어와 성과를 만나보세요.</p><a class="hero-link" href="#archive">참가작품 둘러보기 <span>↗</span></a></div><div class="art" aria-hidden="true"><svg viewBox="0 0 460 320"><defs><linearGradient id="sphere" x2=".8" y2="1"><stop stop-color="#c5e9ff"/><stop offset=".5" stop-color="#5865f2"/><stop offset="1" stop-color="#203293"/></linearGradient><linearGradient id="leaf"><stop stop-color="#0052ff"/><stop offset="1" stop-color="#a2bbff"/></linearGradient></defs><ellipse cx="235" cy="272" rx="106" ry="15" fill="#253da320"/><circle cx="235" cy="153" r="104" fill="url(#sphere)"/><g fill="none" stroke="#e4f5ff" opacity=".28"><ellipse cx="235" cy="153" rx="57" ry="104"/><ellipse cx="235" cy="153" rx="100" ry="37"/><path d="M135 125h200M137 180h198M235 49v208"/></g><ellipse cx="235" cy="154" rx="183" ry="60" transform="rotate(-28 235 154)" stroke="#8699f4" stroke-width="1.4" fill="none"/><ellipse cx="235" cy="154" rx="160" ry="109" transform="rotate(35 235 154)" stroke="#b6c0f1" stroke-dasharray="3 6" fill="none"/><path d="M217 186c-48-21-36-80-36-80 52 5 66 38 54 64 3-36 39-67 85-58-9 50-44 75-80 67l-7 43" fill="url(#leaf)" stroke="#dbeaff" stroke-width="2"/><circle cx="79" cy="213" r="19" fill="#f5f7ff" stroke="#d0dafa"/><path d="m78 201-7 13h8l-2 11 10-16h-8l4-8" fill="#0052ff"/><circle cx="382" cy="83" r="26" fill="#fff" stroke="#d4dffc"/><path d="M370 91v-7h5v7m5 0V74h5v17m5 0V80h5v11" stroke="#5865f2" stroke-width="2"/><circle cx="315" cy="271" r="6" fill="#8cdcff"/><circle cx="111" cy="70" r="4" fill="#9296ff"/></svg><span class="art-label">IDEAS FOR A BETTER TOMORROW</span></div></section>
@@ -462,7 +469,7 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 function render(){const list=PROJECTS.filter(p=>(tab==='all'||p.award)&&(filter==='all'||p.field===Number(filter))&&(!query||(p.name+p.team).toLowerCase().includes(query)));
  document.getElementById('awardNotice').hidden=tab!=='awards';document.getElementById('listTitle').textContent=tab==='awards'?'우수작':filter==='all'?'전체 프로젝트':filter==='0'?'AI 기반\n서비스 기획 구현':'AI 기반\n업무자동화';document.getElementById('count').textContent=`${list.length}개 프로젝트${tab==='awards'?' · 수상작':''}`;
  if(tab==='awards')list.sort((a,b)=>a.field-b.field||({'대상':0,'최우수상':1,'우수상':2}[a.award]-{'대상':0,'최우수상':1,'우수상':2}[b.award]));
- grid.innerHTML=list.length?list.map(p=>`<article class="card"><div class="card-top"><span class="badge ${p.field?'blue':''}">${p.field?'AI 기반<br>업무자동화':'AI 기반<br>서비스 기획 구현'}</span><span class="number">${String(p.id).padStart(2,'0')}</span></div><h3>${esc(p.name)}</h3><p class="team">${esc(p.team)}${p.award?`<span class="award" data-award="${p.award}">${p.award}</span>`:''}</p>${p.summary?`<p class="desc">${esc(p.summary)}</p>`:''}<div class="card-bottom">${p.cardPublished&&p.cardImage?`<button class="action primary" data-id="${p.id}" data-action="card">성과카드 보기 ⤢</button>`:''}<a class="action" href="${esc(p.ebookUrl)}" target="_blank" rel="noopener noreferrer">발표자료 보기 ↗</a>${p.appUrl?`<a class="action" href="${esc(p.appUrl)}" target="_blank" rel="noopener noreferrer">개발물 보기 ↗</a>`:''}${p.videos.length?`<button class="action" data-id="${p.id}" data-action="video">시연영상 보기 ▷${p.videos.length>1?` (${p.videos.length})`:''}</button>`:''}</div></article>`).join(''):'<div class="empty">검색 조건에 맞는 프로젝트가 없습니다.</div>';
+ grid.innerHTML=list.length?list.map(p=>`<article class="card"><div class="card-top"><span class="badge ${p.field?'blue':''}">${p.field?'AI 기반<br>업무자동화':'AI 기반<br>서비스 기획 구현'}</span><span class="number">${String(p.id).padStart(2,'0')}</span></div><h3>${esc(p.name)}</h3><p class="team">${esc(p.team)}${p.award?`<span class="award" data-award="${p.award}">${p.award}</span>`:''}</p>${p.summary?`<p class="desc">${esc(p.summary)}</p>`:''}<div class="card-bottom">${p.cardPublished&&p.cardImage?`<button class="action primary" data-id="${p.id}" data-action="card">성과카드 보기 ⤢</button>`:''}<button class="action primary" type="button" data-id="${p.id}" data-action="ebook">발표자료 보기 ⤢</button>${p.appUrl?`<a class="action" href="${esc(p.appUrl)}" target="_blank" rel="noopener noreferrer">개발물 보기 ↗</a>`:''}${p.videos.length?`<button class="action" data-id="${p.id}" data-action="video">시연영상 보기 ▷${p.videos.length>1?` (${p.videos.length})`:''}</button>`:''}</div></article>`).join(''):'<div class="empty">검색 조건에 맞는 프로젝트가 없습니다.</div>';
 }
 let videoProject=null;
 function selectVideo(index){
@@ -474,15 +481,19 @@ function openItem(id,action){
  const p=PROJECTS.find(x=>x.id===id);if(!p)return;
  if(action==='card'&&(!p.cardPublished||!p.cardImage))return;
  if(action==='video'&&!p.videos.length)return;
+ if(action==='ebook'&&!p.ebookUrl)return;
  focusBefore=document.activeElement;const body=document.getElementById('modalBody');
- document.getElementById('modalTitle').textContent=action==='card'?'성과카드':'프로젝트 영상';
+ document.getElementById('modalTitle').textContent=action==='card'?'성과카드':action==='ebook'?'발표자료':'프로젝트 영상';
  document.getElementById('modalSub').textContent=p.team;
  document.getElementById('zoom').hidden=action!=='card';zoomed=false;document.getElementById('zoom').textContent='확대 150%';
  viewer.classList.toggle('video-viewer',action==='video');
+ viewer.classList.toggle('ebook-viewer',action==='ebook');
  if(action==='video'){
  videoProject=p;
  body.innerHTML=`<div class="video-layout ${p.videos.length===1?'single-video':''}">${p.videos.length>1?`<nav class="video-list" aria-label="영상 선택"><p>영상 목록 · ${p.videos.length}</p>${p.videos.map((v,i)=>`<button class="video-choice" data-video-index="${i}" aria-pressed="false"><span>영상 ${i+1}</span>${esc(v.title)}</button>`).join('')}</nav>`:''}<div id="videoStage" class="video-stage"></div></div>`;
  selectVideo(0);
+ }else if(action==='ebook'){
+ body.innerHTML=`<div class="ebook-toolbar"><span>자료가 표시되지 않으면 새 탭에서 확인해 주세요.</span><a class="action primary" href="${esc(p.ebookUrl)}" target="_blank" rel="noopener noreferrer">새 탭에서 보기 ↗</a></div><iframe class="ebook-frame" src="${esc(p.ebookUrl)}" title="${esc(p.team)} 발표자료" allow="fullscreen" allowfullscreen></iframe>`;
  }else{body.innerHTML=`<div class="image-scroll"><img src="${esc(p.cardImage)}" alt="${esc(p.team)} 성과카드"></div>`}
  viewer.showModal();document.body.style.overflow='hidden';
 }
